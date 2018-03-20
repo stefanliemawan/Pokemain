@@ -113,6 +113,7 @@ public class Pokemain {
             System.out.println("Enemy HP : "+enemy.getHp()+"\n");
             if (enemy.getHp() <= 0){
                 Win(player);
+                checklevelUp(player);
                 System.out.println("You Win");
                 game(player);//
             }
@@ -130,7 +131,15 @@ public class Pokemain {
         player.setExp(player.getExp()+50);
         action.initialise_before_battle(player);
     }
-    
+
+    public void checklevelUp(Pokemon player){
+        if(player.getExp() >= player.getExptoup()){
+            player.setLevel(player.getLevel() + 1);
+            int etup = 4 * (player.getLevel() ** 2) *  player.getExptoup() / 5;
+            player.setExptoup(etup);
+        }
+    }
+
     public void Lose(Pokemon player){
         System.out.println("Play Again?\n1.Yes  2.No");
         int op = scanner.nextInt();
