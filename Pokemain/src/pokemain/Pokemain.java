@@ -68,21 +68,24 @@ public class Pokemain {
                 System.out.println("Bubble Gun!");
             }
         }
+        else if (op == 5){
+            if (action.run() == 1) game(att);
+        }
     }
     
     public void PlayerTurn(Pokemon player, Pokemon enemy){
         if (player.getType() == "Grass"){
-            System.out.println("1.Tackle  2.Growl  3.Tail Whip  4.Vine Whip");
+            System.out.println("1.Tackle  2.Growl  3.Tail Whip  4.Vine Whip  5.Run");
             int op = scanner.nextInt();
             Action(op,player.getType(),player,enemy);
         }
         else if (player.getType() == "Fire"){
-            System.out.println("1.Tackle  2.Growl  3.Tail Whip  4.Flamethrower");
+            System.out.println("1.Tackle  2.Growl  3.Tail Whip  4.Flamethrower  5.Run");
             int op = scanner.nextInt();
             Action(op,player.getType(),player,enemy);
         }
         else if (player.getType() == "Water"){
-            System.out.println("1.Tackle  2.Growl  3.Tail Whip  4.Bubble Gun");
+            System.out.println("1.Tackle  2.Growl  3.Tail Whip  4.Bubble Gun  5.Run");
             int op = scanner.nextInt();
             Action(op,player.getType(),player,enemy);
         }
@@ -108,21 +111,22 @@ public class Pokemain {
         System.out.println("Your pokemon level : "+player.getLevel());
         Pokemon enemy = generateEnemy(player);
         System.out.println("\n|Battle Start|\n");
+        System.out.println("Enemy HP : "+enemy.getHp());
+        System.out.println("Your HP  : "+player.getHp()+"\n");
         while (true){
             PlayerTurn(player,enemy);
             System.out.println("Enemy HP : "+enemy.getHp()+"\n");
             if (enemy.getHp() <= 0){
                 Win(player);
-                checklevelUp(player);
+                action.checklevelUp(player);
                 System.out.println("You Win");
                 game(player);//
             }
             EnemyTurn(player,enemy);
             System.out.println("Your HP  : "+player.getHp()+"\n");
             if (player.getHp() <= 0){
-                Lose(player);
                 System.out.println("You Lose");
-                break;
+                Lose(player);
             }
         }
     }
@@ -132,20 +136,13 @@ public class Pokemain {
         action.initialise_before_battle(player);
     }
 
-    public void checklevelUp(Pokemon player){
-        if(player.getExp() >= player.getExptoup()){
-            player.setLevel(player.getLevel() + 1);
-            int etup = 4 * (player.getLevel() ** 2) *  player.getExptoup() / 5;
-            player.setExptoup(etup);
-        }
-    }
-
     public void Lose(Pokemon player){
         System.out.println("Play Again?\n1.Yes  2.No");
         int op = scanner.nextInt();
         if (op == 1) start();
         else if (op == 2) {
             System.out.println("GOODBYE");
+            System.exit(0);
         }
     }
     

@@ -24,10 +24,10 @@ public class Action {
 	public int run(){
 		int r = rand.nextInt(100) + 1;
 		if (r > 75){
-			System.out.println("You succeed to run!");
+			System.out.println("You succeed to run!\n");
 			return 1;
 		}else {
-			System.out.println("You failed to run!");
+			System.out.println("You failed to run!\n");
 			return 0;
 		}
 	}
@@ -139,6 +139,14 @@ public class Action {
 		int hp = atted.getHp() - damage;
 		att.setHp(hp);
 	}
+        
+        public void checklevelUp(Pokemon player){
+        if(player.getExp() >= player.getExptoup()){
+            player.setLevel(player.getLevel() + 1);
+            int etup = (4 * (player.getLevel() * player.getExptoup()))/5;
+            player.setExptoup(etup);
+        }
+    }
 
 	// Refresh pokemon health, attack, defense equals to max attack/hp/defense (according to level)
 	public void initialise_before_battle(Pokemon att){
