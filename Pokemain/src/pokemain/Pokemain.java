@@ -24,19 +24,19 @@ public class Pokemain {
         if (r == 1){
             Bulbasaur enemy = new Bulbasaur();
             enemy.setLevel(action.random_enemy_level(player));
-            System.out.println("Your enemy is Bulbasaur");
+            System.out.println("Your enemy is Bulbasaur level "+enemy.getLevel());
             return enemy;
         }
         else if (r == 2) {
             Charmander enemy = new Charmander();
             enemy.setLevel(action.random_enemy_level(player));
-            System.out.println("Your enemy is Charmander");
+            System.out.println("Your enemy is Charmander level "+enemy.getLevel());
             return enemy;
         }
         else {
             Squirtle enemy = new Squirtle();
             enemy.setLevel(action.random_enemy_level(player));
-            System.out.println("Your enemy is Squirtle");
+            System.out.println("Your enemy is Squirtle level "+enemy.getLevel());
             return enemy;
         }
     }
@@ -105,6 +105,7 @@ public class Pokemain {
     }
     
     public void game(Pokemon player){
+        System.out.println("Your pokemon level : "+player.getLevel());
         Pokemon enemy = generateEnemy(player);
         System.out.println("\n|Battle Start|\n");
         while (true){
